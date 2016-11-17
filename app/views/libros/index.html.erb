@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<font size=100 color="red">Lista de Libros</font>
+
+<table cellspacing="15" cellpading = "10">
+  <thead>
+    <tr>
+      <th><h2>Titulo<h2></th>
+      <th><h2>Autor<h2></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @libros.each do |libro| %>
+      <tr>
+        <td><font color="blue"><%= libro.titulo + " "%></font></td>
+        <% if libro.autor != nil%>
+          <td><font color=blue><%= libro.autor.nombre + " " + libro.autor.apellidos %></font></td>
+        <% else %>
+          <td><%= "Autor Desconocido" %></td>
+        <% end %>
+        <td><%= link_to 'Mostrar', libro %></td>
+        <td><%= link_to 'Editar', edit_libro_path(libro) %></td>
+        <td><%= link_to 'Borrar', libro, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+      </tr>
+    <% end %>
+    <%= simple_format("\n") %>
+  </tbody>
+</table>
+
+<br>
+
+<strong><%= link_to 'Nuevo libro', new_libro_path %></strong>
+<%= link_to 'Lista Autores', autors_path %>
